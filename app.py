@@ -27,3 +27,19 @@ def generate_text():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)  # Run on all interfaces, port 8080
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Enable CORS
+
+# ... your existing code ...
+
+@app.route('/generate', methods=['POST'])
+def generate_text():
+    # ... your code to process the prompt and generate text ...
+    return jsonify({'generated_text': generated_text})
+
+if __name__ == '__name__':
+    app.run(host='0.0.0.0')
