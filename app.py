@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Load the model and tokenizer
-model_name = "EleutherAI/gpt-neo-125M"  # Choose your desired model size
+model_name = "EleutherAI/gpt-neo-125M"
 tokenizer = GPT2Tokenizer.from_pretrained(model_name)
 model = GPTNeoForCausalLM.from_pretrained(model_name)
 
@@ -21,3 +21,9 @@ def generate_text():
 
     # Decode the generated output
     generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+
+    # Return the generated text as JSON
+    return jsonify({'generated_text': generated_text})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)  # Run on all interfaces, port 8080
